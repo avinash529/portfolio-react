@@ -199,7 +199,7 @@ function ProjectCard({ project }) {
 
 export default function Projects() {
     return (
-        <section id="projects" className="py-24 bg-white dark:bg-zinc-950">
+        <section id="projects" className="py-24 bg-transparent">
             <div className="container mx-auto px-6">
 
                 {/* Work Projects */}

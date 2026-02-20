@@ -23,7 +23,7 @@ const skills = [
 
 export default function Skills() {
     return (
-        <section id="skills" className="py-24 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800">
+        <section id="skills" className="py-24 bg-transparent border-t border-zinc-200 dark:border-zinc-800">
             <div className="container mx-auto px-6 mb-16 text-center">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -40,8 +40,8 @@ export default function Skills() {
 
             <div className="relative w-full overflow-hidden">
                 {/* Gradient fades */}
-                <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-zinc-50 dark:from-zinc-950 to-transparent z-10 pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-zinc-50 dark:from-zinc-950 to-transparent z-10 pointer-events-none" />
+                <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white/0 to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white/0 to-transparent z-10 pointer-events-none" />
 
                 <InfiniteMarquee speed={40}>
                     {skills.map((skill, index) => (

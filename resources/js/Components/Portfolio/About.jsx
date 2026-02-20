@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FaPhoneAlt, FaEnvelope, FaLinkedin, FaGithub, FaMapMarkerAlt } from "react-icons/fa";
+import { FiEye, FiDownload } from "react-icons/fi";
 
 const stats = [
     { label: "Years Experience", value: "3+" },
@@ -9,7 +10,7 @@ const stats = [
 
 export default function About() {
     return (
-        <section id="about" className="py-20 bg-white dark:bg-zinc-900">
+        <section id="about" className="py-20 bg-transparent">
             <div className="container mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -31,6 +32,27 @@ export default function About() {
                             <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed mb-6">
                                 This combination of skills allows me to deliver high-quality software that meets modern development standards. I'm excited to utilize my skills in advancing innovation and optimizing efficiency in back-end development initiatives.
                             </p>
+
+                            {/* CV Actions */}
+                            <div className="flex items-center gap-3 mb-6">
+                                <a
+                                    href="/portfolio-react/public/storage/cv/Avinash_Raju.pdf"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-300 dark:border-zinc-700 rounded-lg hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                                >
+                                    <FiEye size={14} />
+                                    View CV
+                                </a>
+                                <a
+                                    href="/portfolio-react/public/storage/cv/Avinash_Raju.pdf"
+                                    download="Avinash_Raju_CV.pdf"
+                                    className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 border border-indigo-300 dark:border-indigo-700 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-950/50 transition-colors"
+                                >
+                                    <FiDownload size={14} />
+                                    Download CV
+                                </a>
+                            </div>
 
                             {/* Contact Links */}
                             <div className="space-y-3">

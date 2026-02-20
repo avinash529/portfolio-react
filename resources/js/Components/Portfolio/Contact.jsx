@@ -34,7 +34,7 @@ const contactLinks = [
 
 export default function Contact() {
     return (
-        <section id="contact" className="py-24 bg-zinc-50 dark:bg-zinc-950">
+        <section id="contact" className="py-24 bg-transparent">
             <div className="container mx-auto px-6 max-w-4xl">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
