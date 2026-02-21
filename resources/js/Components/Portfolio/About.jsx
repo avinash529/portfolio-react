@@ -27,7 +27,7 @@ export default function About() {
                         {/* Bio */}
                         <div>
                             <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed mb-4">
-                                Over 3 years, I've specialized in PHP development, mastering the <span className="font-semibold text-indigo-500">CodeIgniter</span> framework and <span className="font-semibold text-indigo-500">Laravel</span> to build scalable applications. While I have some experience in automation testing, my primary focus has been on crafting robust and efficient solutions using CodeIgniter and Laravel.
+                                Over 3+ years, I've specialized in Core PHP development, mastering the <span className="font-semibold text-indigo-500">CodeIgniter</span> framework and <span className="font-semibold text-indigo-500">Laravel</span> to build scalable applications. While I have some experience in automation testing, my primary focus has been on crafting robust and efficient solutions using CodeIgniter and Laravel.
                             </p>
                             <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed mb-6">
                                 This combination of skills allows me to deliver high-quality software that meets modern development standards. I'm excited to utilize my skills in advancing innovation and optimizing efficiency in back-end development initiatives.
