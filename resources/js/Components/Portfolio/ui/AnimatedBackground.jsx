@@ -91,10 +91,10 @@ function ShootingStars() {
         const spawnStar = () => {
             const [r, g, b] = STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)];
             // Start from top-right quadrant, travel down-left
-            const startX = canvas.width * 0.3 + Math.random() * canvas.width * 0.8;
+            const startX = -20 + Math.random() * canvas.width * 0.6;  // spawn left side
             const startY = -20 + Math.random() * canvas.height * 0.35;
-            const speed = 9 + Math.random() * 8;
-            const angle = (Math.PI * 5) / 4 + (Math.random() - 0.5) * 0.4; // ~225° ± variation
+            const speed = 4 + Math.random() * 3;
+            const angle = Math.PI / 4 + (Math.random() - 0.5) * 0.4; // ~45° → upper-left to lower-right
 
             stars.push({
                 x: startX,
@@ -196,7 +196,100 @@ function ShootingStars() {
     );
 }
 
-/* ─────── Main export ─────── */
+/* ─────── Light theme: soft floating dots ─────── */
+function FloatingDots() {
+    const canvasRef = useRef(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        let animId;
+
+        const resize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        resize();
+        window.addEventListener("resize", resize);
+
+        const COLORS = [
+            [99, 102, 241],   // indigo
+            [139, 92, 246],   // violet
+            [236, 72, 153],   // pink
+            [59, 130, 246],   // blue
+            [16, 185, 129],   // emerald
+        ];
+
+        const count = Math.max(Math.floor((canvas.width * canvas.height) / 18000), 18);
+        const dots = Array.from({ length: count }, () => {
+            const [r, g, b] = COLORS[Math.floor(Math.random() * COLORS.length)];
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: 4 + Math.random() * 9,
+                vx: (Math.random() - 0.5) * 0.25,
+                vy: -0.12 - Math.random() * 0.28,   // drift upward
+                baseAlpha: 0.06 + Math.random() * 0.09,
+                pulsePhase: Math.random() * Math.PI * 2,
+                pulseSpeed: 0.006 + Math.random() * 0.010,
+                r, g, b,
+            };
+        });
+
+        let frame = 0;
+        const draw = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            frame++;
+
+            for (const d of dots) {
+                d.x += d.vx;
+                d.y += d.vy;
+
+                // wrap edges
+                if (d.y + d.radius < 0) d.y = canvas.height + d.radius;
+                if (d.x + d.radius < 0) d.x = canvas.width + d.radius;
+                if (d.x - d.radius > canvas.width) d.x = -d.radius;
+
+                const pulse = Math.sin(frame * d.pulseSpeed + d.pulsePhase);
+                const a = d.baseAlpha * (0.65 + 0.35 * pulse);
+
+                // soft glow halo
+                const grd = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.radius * 2.8);
+                grd.addColorStop(0, `rgba(${d.r},${d.g},${d.b},${a})`);
+                grd.addColorStop(0.5, `rgba(${d.r},${d.g},${d.b},${a * 0.35})`);
+                grd.addColorStop(1, `rgba(${d.r},${d.g},${d.b},0)`);
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, d.radius * 2.8, 0, Math.PI * 2);
+                ctx.fillStyle = grd;
+                ctx.fill();
+
+                // solid centre pip
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, d.radius * 0.35, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${d.r},${d.g},${d.b},${a * 1.5})`;
+                ctx.fill();
+            }
+
+            animId = requestAnimationFrame(draw);
+        };
+
+        draw();
+
+        return () => {
+            cancelAnimationFrame(animId);
+            window.removeEventListener("resize", resize);
+        };
+    }, []);
+
+    return (
+        <canvas
+            ref={canvasRef}
+            style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}
+        />
+    );
+}
+
 export default function AnimatedBackground() {
     const [mounted, setMounted] = useState(false);
     const [isDark, setIsDark] = useState(false);
@@ -286,6 +379,9 @@ export default function AnimatedBackground() {
 
             {/* Shooting stars — dark mode only */}
             {isDark && <ShootingStars />}
+
+            {/* Floating dots — light mode only */}
+            {!isDark && <FloatingDots />}
         </>
     );
 }
