@@ -1,0 +1,26 @@
+/* ============================================
+   App Component Styles
+   ============================================ */
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Selection / highlight color */
+.app ::selection {
+  background-color: #6366f1;
+  color: #ffffff;
+}
+
+.app ::-moz-selection {
+  background-color: #6366f1;
+  color: #ffffff;
+}

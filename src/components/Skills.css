@@ -1,0 +1,127 @@
+.skills {
+  padding: 6rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.skills__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section title */
+.skills__title {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.skills__title::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-purple));
+  border-radius: 2px;
+  margin: 0.75rem auto 0;
+}
+
+.skills__subtitle {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  font-family: var(--font-body);
+  max-width: 36rem;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+/* Marquee wrapper */
+.skills__marquee-wrapper {
+  position: relative;
+  padding: 1rem 0;
+}
+
+/* Skill pills */
+.skills__pill {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 1.125rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.skills__pill:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+.skills__logo {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.skills__name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+/* Gradient fade edges */
+.skills__fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.skills__fade--left {
+  left: 0;
+  background: linear-gradient(to right, var(--color-bg-primary), transparent);
+}
+
+.skills__fade--right {
+  right: 0;
+  background: linear-gradient(to left, var(--color-bg-primary), transparent);
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .skills {
+    padding: 4rem 1rem;
+  }
+
+  .skills__fade {
+    width: 3rem;
+  }
+
+  .skills__pill {
+    padding: 0.5rem 0.875rem;
+  }
+
+  .skills__logo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .skills__name {
+    font-size: 0.8125rem;
+  }
+}

@@ -1,0 +1,341 @@
+/* ============================================
+   GLOBAL DESIGN SYSTEM — index.css
+   Portfolio of Avinash Raju
+   ============================================ */
+
+
+/* ------------------------------------------
+   A) CSS Reset
+   ------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+
+/* ------------------------------------------
+   B) CSS Custom Properties — Light Mode (Default)
+   ------------------------------------------ */
+
+:root {
+  /* Background */
+  --color-bg-primary: #fafafa;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f4f4f5;
+  --color-bg-card: #ffffff;
+
+  /* Text */
+  --color-text-primary: #18181b;
+  --color-text-secondary: #52525b;
+  --color-text-muted: #71717a;
+  --color-text-inverse: #ffffff;
+
+  /* Borders */
+  --color-border: #e4e4e7;
+  --color-border-light: #f4f4f5;
+  --color-border-hover: #a5b4fc;
+
+  /* Accent palette */
+  --color-accent: #6366f1;
+  --color-accent-purple: #a855f7;
+  --color-accent-pink: #ec4899;
+  --color-accent-green: #22c55e;
+  --color-accent-sky: #0ea5e9;
+  --color-accent-amber: #f59e0b;
+  --color-accent-red: #ef4444;
+  --color-accent-teal: #14b8a6;
+  --color-accent-orange: #f97316;
+  --color-accent-rose: #f43f5e;
+  --color-accent-emerald: #10b981;
+  --color-accent-violet: #8b5cf6;
+
+  /* Navigation */
+  --color-nav-bg: rgba(255, 255, 255, 0.7);
+  --color-nav-bg-scrolled: rgba(255, 255, 255, 0.7);
+
+  /* Overlay */
+  --color-overlay: rgba(255, 255, 255, 0.95);
+
+  /* Typography */
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+
+/* ------------------------------------------
+   C) Dark Mode Overrides
+   ------------------------------------------ */
+
+html.dark {
+  --color-bg-primary: #09090b;
+  --color-bg-secondary: #18181b;
+  --color-bg-tertiary: #27272a;
+  --color-bg-card: #18181b;
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+  --color-text-inverse: #18181b;
+
+  --color-border: #27272a;
+  --color-border-light: #27272a;
+  --color-border-hover: #4338ca;
+
+  --color-nav-bg: transparent;
+  --color-nav-bg-scrolled: rgba(0, 0, 0, 0.7);
+
+  --color-overlay: rgba(0, 0, 0, 0.95);
+}
+
+
+/* ------------------------------------------
+   D) Global Styles
+   ------------------------------------------ */
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: #6366f1;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #6366f1;
+  color: #ffffff;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Firefox scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-muted) var(--color-bg-primary);
+}
+
+
+/* ------------------------------------------
+   E) Utility Classes
+   ------------------------------------------ */
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Section */
+.section {
+  padding: 6rem 0;
+}
+
+/* Section title */
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Primary button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background-color: var(--color-text-primary);
+  color: var(--color-text-inverse);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Outline button */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background-color: transparent;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-hover);
+  transform: scale(1.05);
+}
+
+/* Card */
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Tag / pill */
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+}
+
+
+/* ------------------------------------------
+   F) Keyframe Animations
+   ------------------------------------------ */
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+
+/* ------------------------------------------
+   G) Responsive Breakpoints
+   ------------------------------------------ */
+
+/* sm: 640px */
+@media (min-width: 640px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+/* md: 768px */
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .section {
+    padding: 7rem 0;
+  }
+}
+
+/* lg: 1024px */
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2.5rem;
+  }
+}
+
+/* xl: 1280px */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
