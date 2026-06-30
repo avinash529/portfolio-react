@@ -152,6 +152,12 @@ function ProjectCard({ project, index, isWork }) {
             {/* Hover glow overlay */}
             <div className="project-card__glow" />
 
+            {/* Decorative visual header */}
+            <div className="project-card__visual">
+                <div className="project-card__visual-grid" />
+                <div className="project-card__visual-shape" />
+            </div>
+
             {/* Top row */}
             <div className="project-card__top-row">
                 <div className="project-card__top-left">

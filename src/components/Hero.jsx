@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-scroll';
 import { motion } from 'framer-motion';
 import Spotlight from './ui/Spotlight';
+import TypeWriter from './ui/TypeWriter';
+import MagneticButton from './ui/MagneticButton';
 import './Hero.css';
 
 const Hero = () => {
@@ -19,7 +21,7 @@ const Hero = () => {
             className="hero__badge"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
           >
             <span className="hero__badge-dot">
               <span className="hero__badge-dot-ping" />
@@ -29,24 +31,29 @@ const Hero = () => {
           </motion.div>
 
           {/* Name */}
-          <motion.h1
-            className="hero__name"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Avinash Raju
-          </motion.h1>
+          <h1 className="hero__name">
+            {'Avinash Raju'.split(' ').map((word, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 0.6, delay: 0.1 + i * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                style={{ display: 'inline-block', marginRight: i === 0 ? '0.3em' : '0' }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
 
           {/* Subtitle */}
-          <motion.p
+          <motion.div
             className="hero__title"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            PHP Developer
-          </motion.p>
+            <TypeWriter words={['PHP Developer', 'Backend Engineer', 'CodeIgniter Expert', 'Problem Solver']} speed={100} />
+          </motion.div>
 
           {/* Description */}
           <motion.p
@@ -55,7 +62,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            3+ years specializing in PHP &amp; CodeIgniter, building scalable
+            4+ years specializing in PHP &amp; CodeIgniter, building scalable
             backend systems and modern full-stack applications. Based in Kochi,
             India.
           </motion.p>
@@ -67,20 +74,24 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Link
-              to="projects"
-              smooth={true}
-              duration={500}
-              className="hero__btn hero__btn--primary"
-            >
-              See My Work
-            </Link>
-            <a
-              href="mailto:avinashraju815@gmail.com"
-              className="hero__btn hero__btn--secondary"
-            >
-              Contact Me
-            </a>
+            <MagneticButton strength={0.25}>
+              <Link
+                to="projects"
+                smooth={true}
+                duration={500}
+                className="hero__btn hero__btn--primary"
+              >
+                See My Work
+              </Link>
+            </MagneticButton>
+            <MagneticButton strength={0.25}>
+              <a
+                href="mailto:avinashraju815@gmail.com"
+                className="hero__btn hero__btn--secondary"
+              >
+                Contact Me
+              </a>
+            </MagneticButton>
           </motion.div>
         </div>
       </Spotlight>

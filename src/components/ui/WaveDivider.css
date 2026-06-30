@@ -1,0 +1,42 @@
+.wave-divider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.wave-divider__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wave-divider__fill {
+  /* Semi-transparent blur layer or subtle primary color bg overlay */
+  fill: var(--color-bg-primary);
+  opacity: 0.15;
+}
+
+.wave-divider__stroke {
+  stroke: var(--color-accent);
+  opacity: 0.4;
+  filter: drop-shadow(0 0 3px var(--color-accent));
+  transition: stroke 0.3s ease;
+}
+
+.wave-divider--wave2 .wave-divider__stroke {
+  stroke: var(--color-accent-purple);
+  filter: drop-shadow(0 0 3px var(--color-accent-purple));
+}
+
+.wave-divider--curve .wave-divider__stroke {
+  stroke: var(--color-accent-pink);
+  filter: drop-shadow(0 0 3px var(--color-accent-pink));
+}
+
+/* We will inject a global SVG gradient into index.html or Main.jsx or App.jsx so that wave divider strokes use a brand gradient */
+.wave-divider svg {
+  overflow: visible;
+}

@@ -1,0 +1,98 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-bg-primary);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.preloader__ring {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.preloader__logo {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.preloader__logo-text {
+  font-size: 2.25rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-purple),
+    var(--color-accent-pink)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.preloader__logo-glow {
+  position: absolute;
+  font-size: 2.25rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-purple),
+    var(--color-accent-pink)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: blur(12px);
+  opacity: 0.65;
+  animation: preloaderLogoPulse 2s ease-in-out infinite;
+}
+
+.preloader__progress {
+  width: 120px;
+  height: 3px;
+  background-color: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.preloader__progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-purple), var(--color-accent-pink));
+  border-radius: 999px;
+}
+
+@keyframes preloaderLogoPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.85;
+  }
+}

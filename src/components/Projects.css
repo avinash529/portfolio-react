@@ -103,6 +103,45 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
+/* Decorative visual header inside card */
+.project-card__visual {
+  position: relative;
+  width: calc(100% + 3.5rem);
+  height: 90px;
+  margin-top: -1.75rem;
+  margin-left: -1.75rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  background: var(--color-bg-tertiary);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.project-card__visual-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 12px 12px;
+  opacity: 0.3;
+}
+
+.project-card__visual-shape {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.35;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.project-card:hover .project-card__visual-shape {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0.5;
+}
+
 /* span=2 on desktop */
 @media (min-width: 768px) {
   .project-card--span-2 {
@@ -431,3 +470,18 @@
 .project-card--zinc .project-card__glow {
   background: linear-gradient(135deg, #71717a, #52525b);
 }
+
+/* Visual Shape Colors */
+.project-card--indigo .project-card__visual-shape { background: #6366f1; }
+.project-card--purple .project-card__visual-shape { background: #a855f7; }
+.project-card--emerald .project-card__visual-shape { background: #10b981; }
+.project-card--pink .project-card__visual-shape { background: #ec4899; }
+.project-card--sky .project-card__visual-shape { background: #0ea5e9; }
+.project-card--orange .project-card__visual-shape { background: #f97316; }
+.project-card--rose .project-card__visual-shape { background: #f43f5e; }
+.project-card--amber .project-card__visual-shape { background: #f59e0b; }
+.project-card--teal .project-card__visual-shape { background: #14b8a6; }
+.project-card--violet .project-card__visual-shape { background: #8b5cf6; }
+.project-card--green .project-card__visual-shape { background: #22c55e; }
+.project-card--zinc .project-card__visual-shape { background: #71717a; }
+

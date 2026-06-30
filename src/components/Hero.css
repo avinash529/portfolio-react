@@ -8,6 +8,95 @@
   padding: 2rem 1.5rem;
 }
 
+/* ─── Profile Avatar ────────────────────────────────────── */
+.hero__avatar-wrapper {
+  margin-bottom: 0.5rem;
+}
+
+.hero__avatar-ring {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-purple),
+    var(--color-accent-pink),
+    var(--color-accent-purple),
+    var(--color-accent)
+  );
+  background-size: 300% 300%;
+  animation: avatarGradientShift 6s ease-in-out infinite;
+  padding: 4px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hero__avatar-ring:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 30px rgba(99, 102, 241, 0.35),
+    0 0 60px rgba(168, 85, 247, 0.2);
+}
+
+.hero__avatar-ring-glow {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-purple),
+    var(--color-accent-pink),
+    var(--color-accent-purple),
+    var(--color-accent)
+  );
+  background-size: 300% 300%;
+  filter: blur(24px);
+  animation: avatarGradientShift 6s ease-in-out infinite, avatarGlowBreath 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero__avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-bg-primary);
+  transition: transform 0.4s ease;
+}
+
+.hero__avatar-ring:hover .hero__avatar-img {
+  transform: scale(1.03);
+}
+
+@keyframes avatarGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes avatarGlowBreath {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+}
+
 /* Grid pattern background */
 .hero__grid {
   position: absolute;
@@ -183,6 +272,11 @@
 
 /* ─── Responsive ─────────────────────────────────────────── */
 @media (min-width: 768px) {
+  .hero__avatar-ring {
+    width: 180px;
+    height: 180px;
+  }
+
   .hero__name {
     font-size: 4.5rem;
   }
@@ -193,12 +287,22 @@
 }
 
 @media (min-width: 1024px) {
+  .hero__avatar-ring {
+    width: 200px;
+    height: 200px;
+  }
+
   .hero__name {
     font-size: 6rem;
   }
 }
 
 @media (max-width: 480px) {
+  .hero__avatar-ring {
+    width: 130px;
+    height: 130px;
+  }
+
   .hero__actions {
     flex-direction: column;
     width: 100%;

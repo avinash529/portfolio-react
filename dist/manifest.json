@@ -1,0 +1,16 @@
+{
+  "short_name": "Avinash R",
+  "name": "Avinash Raju | PHP Developer Portfolio",
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512 192x192 144x144"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#09090b",
+  "theme_color": "#6366f1",
+  "display": "standalone",
+  "orientation": "portrait"
+}
