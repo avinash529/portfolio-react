@@ -5,24 +5,31 @@ import './Testimonials.css';
 
 const testimonialsData = [
   {
-    quote: "Avinash designed our Jobstars Candidate & Invoice System with outstanding efficiency. The automated modules solved a major bottleneck for our placement operations. His database design and CodeIgniter skills are top-tier.",
-    name: "S. Raghavan",
-    role: "Technical Lead",
-    company: "YUYI Technology",
+    quote: "Avinash designed our Jobstars Candidate & Invoice System with outstanding efficiency. The automated modules solved a major bottleneck for our placement operations. His technical planning and CodeIgniter skills are top-tier.",
+    name: "Sreedhar",
+    role: "CEO",
+    company: "YUYI TECHNOLOGY AND MANAGEMENT SERVICES PRIVATE LIMITED",
     color: "var(--color-accent)"
   },
   {
-    quote: "Avinash took full ownership of the complex Will succession system backend, structuring asset distribution workflows and MS SQL optimizations cleanly. He is highly reliable and collaborates exceptionally well with QA teams.",
-    name: "Elizabeth Kurian",
-    role: "Project Manager",
+    quote: "Avinash proved to be highly professional and efficient in delivering key client platforms like FARELABS and ELMS for Spices Board. His dedication and understanding of commercial requirements enabled us to deliver projects on time.",
+    name: "Rajeev",
+    role: "Commercial Director",
     company: "Megatrend KMS",
     color: "var(--color-accent-purple)"
   },
   {
-    quote: "An excellent bootcamp mentor. Avinash doesn't just teach code syntax; he coaches on real-world development standards: MVC architecture, Git workflows, debugging, and mock interview prep. The best tutor I've had.",
-    name: "Rahul K. S.",
-    role: "Junior PHP Developer",
-    company: "Avodha Bootcamp Graduate",
+    quote: "Avinash took full ownership of the complex Will succession system backend, structuring asset distribution workflows and MS SQL optimizations cleanly. He is highly reliable and collaborates exceptionally well with engineering and QA teams.",
+    name: "Sudeep",
+    role: "Technical Director",
+    company: "Megatrend KMS",
+    color: "var(--color-accent-violet)"
+  },
+  {
+    quote: "An excellent bootcamp mentor. Avinash doesn't just teach code syntax; he coaches students on real-world development standards: MVC architecture, Git workflows, debugging, and mock interview prep. He has been instrumental in preparing our graduates for successful placements.",
+    name: "Jaisal",
+    role: "Chief Placement Officer",
+    company: "Avodha Edutech",
     color: "var(--color-accent-emerald)"
   }
 ];
