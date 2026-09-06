@@ -1,151 +1,185 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiMoon, HiSun, HiMenuAlt3, HiX } from 'react-icons/hi';
+import { FaLinkedin, FaGithub, FaEnvelope, FaFileDownload, FaBars, FaTimes } from 'react-icons/fa';
+import { BsStars } from 'react-icons/bs';
 import './Navbar.css';
 
 const navLinks = [
-  { name: 'About', to: 'about' },
+  { name: 'About me', to: 'about' },
   { name: 'Skills', to: 'skills' },
+  { name: 'Security', to: 'encryption' },
   { name: 'Projects', to: 'projects' },
+  { name: 'GitHub', to: 'github-stats' },
   { name: 'Contact', to: 'contact' },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    const stored = localStorage.getItem('theme');
-    if (stored) return stored === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
 
-  // Apply dark mode class on mount and toggle
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [darkMode]);
-
-  // Scroll detection
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleTheme = () => setDarkMode((prev) => !prev);
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <nav className={`navbar${scrolled ? ' navbar--scrolled' : ''}`}>
-      <div className="navbar__container">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
+    <header className={`space-navbar ${scrolled ? 'space-navbar--scrolled' : ''}`}>
+      <div className="space-navbar__inner">
+        {/* Brand / Logo */}
+        <Link
+          to="hero"
+          smooth={true}
+          duration={500}
+          className="space-navbar__brand"
+          onClick={closeMenu}
         >
-          <Link
-            className="navbar__logo"
-            to="hero"
-            smooth={true}
-            duration={500}
-            onClick={closeMenu}
-          >
-            AR.
-          </Link>
-        </motion.div>
+          <div className="space-navbar__logo-orb">
+            <BsStars className="space-navbar__logo-icon" />
+          </div>
+          <span className="space-navbar__brand-name">
+            Avinash <span className="space-navbar__brand-gradient">Raju</span>
+          </span>
+        </Link>
 
-        {/* Desktop nav links */}
-        <ul className="navbar__links">
-          {navLinks.map((link, i) => (
-            <motion.li
+        {/* Central Space Nav Pill (Desktop) */}
+        <nav className="space-navbar__pill-nav" aria-label="Main Navigation">
+          {navLinks.map((link) => (
+            <Link
               key={link.to}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 + i * 0.08 }}
+              to={link.to}
+              smooth={true}
+              duration={500}
+              spy={true}
+              offset={-70}
+              className="space-navbar__nav-item"
+              activeClass="space-navbar__nav-item--active"
             >
-              <Link
-                className="navbar__link"
-                to={link.to}
-                smooth={true}
-                duration={500}
-                spy={true}
-                offset={-80}
-              >
-                {link.name}
-              </Link>
-            </motion.li>
+              {link.name}
+            </Link>
           ))}
-        </ul>
+        </nav>
 
-        {/* Right side: theme toggle + hamburger */}
-        <div className="navbar__right">
-          <motion.button
-            className="navbar__theme-toggle"
-            onClick={toggleTheme}
-            whileTap={{ scale: 0.9 }}
-            aria-label="Toggle theme"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
+        {/* Right Side: Social links + CV button + Mobile Toggle */}
+        <div className="space-navbar__actions">
+          <div className="space-navbar__socials">
+            <a
+              href="https://www.linkedin.com/in/avinash-raju-b8b154184/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="space-navbar__social-icon"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin />
+            </a>
+            <a
+              href="https://github.com/avinash529"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="space-navbar__social-icon"
+              aria-label="GitHub"
+            >
+              <FaGithub />
+            </a>
+            <a
+              href="mailto:avinashraju815@gmail.com"
+              className="space-navbar__social-icon"
+              aria-label="Email"
+            >
+              <FaEnvelope />
+            </a>
+          </div>
+
+          <a
+            href="/cv/Avinash_Raju.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="space-navbar__cv-btn"
           >
-            {darkMode ? <HiSun /> : <HiMoon />}
-          </motion.button>
+            <FaFileDownload size={12} />
+            <span>CV</span>
+          </a>
 
+          {/* Mobile hamburger button */}
           <button
-            className="navbar__hamburger"
+            className="space-navbar__toggle"
             onClick={toggleMenu}
-            aria-label="Toggle menu"
+            aria-label="Toggle Navigation"
           >
-            {menuOpen ? <HiX /> : <HiMenuAlt3 />}
+            {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="navbar__mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            className="space-navbar__mobile-drawer"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
           >
-            <ul className="navbar__mobile-links">
-              {navLinks.map((link, i) => (
-                <motion.li
+            <div className="space-navbar__mobile-list">
+              {navLinks.map((link) => (
+                <Link
                   key={link.to}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
+                  to={link.to}
+                  smooth={true}
+                  duration={500}
+                  offset={-70}
+                  onClick={closeMenu}
+                  className="space-navbar__mobile-link"
                 >
-                  <Link
-                    className="navbar__mobile-link"
-                    to={link.to}
-                    smooth={true}
-                    duration={500}
-                    offset={-80}
-                    onClick={closeMenu}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.li>
+                  {link.name}
+                </Link>
               ))}
-            </ul>
+
+              <div className="space-navbar__mobile-socials">
+                <a
+                  href="https://www.linkedin.com/in/avinash-raju-b8b154184/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="space-navbar__social-icon"
+                >
+                  <FaLinkedin size={20} />
+                </a>
+                <a
+                  href="https://github.com/avinash529"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="space-navbar__social-icon"
+                >
+                  <FaGithub size={20} />
+                </a>
+                <a
+                  href="mailto:avinashraju815@gmail.com"
+                  className="space-navbar__social-icon"
+                >
+                  <FaEnvelope size={20} />
+                </a>
+                <a
+                  href="/cv/Avinash_Raju.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="space-navbar__cv-btn"
+                >
+                  <FaFileDownload size={12} />
+                  <span>Download CV</span>
+                </a>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 };
 

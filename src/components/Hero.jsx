@@ -1,100 +1,162 @@
 import React from 'react';
 import { Link } from 'react-scroll';
 import { motion } from 'framer-motion';
-import Spotlight from './ui/Spotlight';
+import { HiSparkles } from 'react-icons/hi2';
+import { FaRocket, FaFileDownload, FaEnvelope, FaCode } from 'react-icons/fa';
 import TypeWriter from './ui/TypeWriter';
-import MagneticButton from './ui/MagneticButton';
+import CosmicHeroCanvas from './3d/CosmicHeroCanvas';
 import './Hero.css';
 
 const Hero = () => {
   return (
-    <section className="hero" id="hero">
-      {/* Grid pattern */}
-      <div className="hero__grid" />
-      {/* Radial mask */}
-      <div className="hero__mask" />
+    <section className="space-hero" id="hero">
+      {/* ─── Top Inverted Black Hole Video Vortex ──────────── */}
+      <div className="space-hero__video-container">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="space-hero__blackhole-video"
+        >
+          <source src="/videos/blackhole.webm" type="video/webm" />
+        </video>
+        <div className="space-hero__video-overlay" />
+      </div>
 
-      <Spotlight spotlightColor="rgba(99, 102, 241, 0.08)">
-        <div className="hero__content">
-          {/* Status badge */}
-          <motion.div
-            className="hero__badge"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
-            <span className="hero__badge-dot">
-              <span className="hero__badge-dot-ping" />
-              <span className="hero__badge-dot-core" />
-            </span>
-            Open to PHP Developer opportunities
-          </motion.div>
+      <div className="space-hero__container">
+        <div className="space-hero__grid">
+          {/* ─── Left Column: Content & Call to Actions ──────────── */}
+          <div className="space-hero__content">
+            {/* Sparkle Welcome Box Badge */}
+            <motion.div
+              className="space-hero__welcome-box"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <HiSparkles className="space-hero__welcome-icon" />
+              <span className="space-hero__welcome-text">
+                Fullstack PHP &amp; Backend Architect Portfolio
+              </span>
+            </motion.div>
 
-          {/* Name */}
-          <h1 className="hero__name">
-            {'Avinash Raju'.split(' ').map((word, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                transition={{ duration: 0.6, delay: 0.1 + i * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
-                style={{ display: 'inline-block', marginRight: i === 0 ? '0.3em' : '0' }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </h1>
+            {/* Dynamic Headline */}
+            <motion.h1
+              className="space-hero__headline"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Providing{' '}
+              <span className="space-hero__gradient-text">the best backend</span>{' '}
+              &amp; system architecture experience.
+            </motion.h1>
 
-          {/* Subtitle */}
-          <motion.div
-            className="hero__title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <TypeWriter words={['PHP Developer', 'Backend Engineer', 'CodeIgniter Expert', 'Problem Solver']} speed={100} />
-          </motion.div>
+            {/* Subtitle with TypeWriter */}
+            <motion.div
+              className="space-hero__typewriter-box"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <TypeWriter
+                words={[
+                  'Senior PHP Developer',
+                  'CodeIgniter 4 / 3 Specialist',
+                  'Backend Architect',
+                  'Laravel & REST API Engineer',
+                ]}
+                speed={90}
+              />
+            </motion.div>
 
-          {/* Description */}
-          <motion.p
-            className="hero__description"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            4+ years specializing in PHP &amp; CodeIgniter, building scalable
-            backend systems and modern full-stack applications. Based in Kochi,
-            India.
-          </motion.p>
+            {/* Bio Description */}
+            <motion.p
+              className="space-hero__bio"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              Hi, I'm <strong className="text-white">Avinash Raju</strong> — 4+ years
+              architecting production-grade backend systems, enterprise ERPs, and
+              high-throughput web platforms with PHP, CodeIgniter, Laravel, and MySQL.
+              Based in Kochi, India.
+            </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            className="hero__actions"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <MagneticButton strength={0.25}>
+            {/* Metric Badges */}
+            <motion.div
+              className="space-hero__metrics"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+            >
+              <div className="space-hero__metric-pill">
+                <span className="space-hero__metric-num">4+</span>
+                <span className="space-hero__metric-lbl">Years Exp</span>
+              </div>
+              <div className="space-hero__metric-pill">
+                <span className="space-hero__metric-num">4+</span>
+                <span className="space-hero__metric-lbl">Live Production Apps</span>
+              </div>
+              <div className="space-hero__metric-pill">
+                <span className="space-hero__metric-num">CI 3/4</span>
+                <span className="space-hero__metric-lbl">Core Mastery</span>
+              </div>
+            </motion.div>
+
+            {/* Action Buttons */}
+            <motion.div
+              className="space-hero__actions"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
               <Link
                 to="projects"
                 smooth={true}
                 duration={500}
-                className="hero__btn hero__btn--primary"
+                offset={-70}
+                className="space-hero__btn space-hero__btn--primary"
               >
-                See My Work
+                <FaRocket size={14} />
+                <span>Explore Work</span>
               </Link>
-            </MagneticButton>
-            <MagneticButton strength={0.25}>
+
               <a
-                href="mailto:avinashraju815@gmail.com"
-                className="hero__btn hero__btn--secondary"
+                href="/cv/Avinash_Raju.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="space-hero__btn space-hero__btn--secondary"
               >
-                Contact Me
+                <FaFileDownload size={14} />
+                <span>View CV</span>
               </a>
-            </MagneticButton>
+
+              <Link
+                to="contact"
+                smooth={true}
+                duration={500}
+                offset={-70}
+                className="space-hero__btn space-hero__btn--outline"
+              >
+                <FaEnvelope size={14} />
+                <span>Get In Touch</span>
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* ─── Right Column: 3D Celestial Core Canvas ──────────── */}
+          <motion.div
+            className="space-hero__visual"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <CosmicHeroCanvas />
           </motion.div>
         </div>
-      </Spotlight>
+      </div>
     </section>
   );
 };

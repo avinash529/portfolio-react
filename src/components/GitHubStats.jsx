@@ -1,15 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaCode, FaUsers, FaStar, FaLaptopCode, FaGithub } from 'react-icons/fa';
+import { FaCode, FaUsers, FaStar, FaLaptopCode, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import './GitHubStats.css';
 
 const FALLBACK = { public_repos: 20, followers: 5 };
 
-const stats = (data) => [
-  { icon: <FaCode />, value: data.public_repos, label: 'Public Repos' },
-  { icon: <FaUsers />, value: data.followers, label: 'Followers' },
-  { icon: <FaStar />, value: '20+', label: 'Total Stars' },
-  { icon: <FaLaptopCode />, value: 'PHP', label: 'Top Language' },
+const statsConfig = (data) => [
+  {
+    icon: FaCode,
+    value: data.public_repos,
+    label: 'Public Repositories',
+    color: '#818cf8',
+  },
+  {
+    icon: FaUsers,
+    value: data.followers,
+    label: 'GitHub Followers',
+    color: '#38bdf8',
+  },
+  {
+    icon: FaStar,
+    value: '20+',
+    label: 'Repository Stars',
+    color: '#fbbf24',
+  },
+  {
+    icon: FaLaptopCode,
+    value: 'PHP',
+    label: 'Top Language',
+    color: '#a855f7',
+  },
 ];
 
 const GitHubStats = () => {
@@ -25,52 +45,82 @@ const GitHubStats = () => {
       .catch(() => setData(FALLBACK));
   }, []);
 
+  const stats = statsConfig(data);
+
   return (
-    <section className="github-stats section" id="github-stats">
-      <motion.div
-        className="section__header"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        <FaGithub className="section__header-icon" />
-        <h2 className="section__title">GitHub Activity</h2>
-      </motion.div>
-
-      <div className="github-stats__grid">
-        {stats(data).map((stat, i) => (
-          <motion.div
-            className="github-stats__card card"
-            key={stat.label}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.1 }}
-          >
-            <div className="github-stats__icon">{stat.icon}</div>
-            <span className="github-stats__value">{stat.value}</span>
-            <span className="github-stats__label">{stat.label}</span>
-          </motion.div>
-        ))}
-      </div>
-
-      <motion.div
-        className="github-stats__link-wrapper"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-      >
-        <a
-          href="https://github.com/avinash529"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="github-stats__link"
+    <section className="space-github" id="github-stats">
+      <div className="space-github__container">
+        {/* Header */}
+        <motion.div
+          className="space-github__header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
-          View Full Profile →
-        </a>
-      </motion.div>
+          <div className="space-github__icon-banner">
+            <FaGithub />
+          </div>
+          <h2 className="space-github__title">
+            GitHub <span className="space-github__title-gradient">Telemetry</span>
+          </h2>
+          <p className="space-github__subtitle">
+            Live developer metrics tracked via GitHub API from{' '}
+            <span className="text-white font-medium">@avinash529</span>
+          </p>
+        </motion.div>
+
+        {/* 4 Telemetry Cards */}
+        <div className="space-github__grid">
+          {stats.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={item.label}
+                className="space-github__card"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.1 }}
+                whileHover={{ y: -6 }}
+              >
+                <div
+                  className="space-github__card-glow"
+                  style={{ background: item.color }}
+                />
+                <div
+                  className="space-github__card-icon"
+                  style={{ color: item.color, borderColor: `${item.color}55` }}
+                >
+                  <Icon />
+                </div>
+                <span className="space-github__card-value">{item.value}</span>
+                <span className="space-github__card-label">{item.label}</span>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* CTA to view full profile */}
+        <motion.div
+          className="space-github__footer"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <a
+            href="https://github.com/avinash529"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="space-github__btn"
+          >
+            <FaGithub size={16} />
+            <span>Explore @avinash529 on GitHub</span>
+            <FaExternalLinkAlt size={12} />
+          </a>
+        </motion.div>
+      </div>
     </section>
   );
 };

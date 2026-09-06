@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FiEye, FiDownload } from 'react-icons/fi';
 import {
   FaPhoneAlt,
@@ -7,6 +7,8 @@ import {
   FaMapMarkerAlt,
   FaLinkedin,
   FaGithub,
+  FaBriefcase,
+  FaGraduationCap,
 } from 'react-icons/fa';
 import './About.css';
 
@@ -30,14 +32,14 @@ const contactLinks = [
   },
   {
     icon: <FaLinkedin />,
-    label: 'LinkedIn',
-    href: 'https://linkedin.com/in/avinashraju',
+    label: 'LinkedIn Profile',
+    href: 'https://www.linkedin.com/in/avinash-raju-b8b154184/',
     isLink: true,
     external: true,
   },
   {
     icon: <FaGithub />,
-    label: 'GitHub',
+    label: 'GitHub (@avinash529)',
     href: 'https://github.com/avinash529',
     isLink: true,
     external: true,
@@ -46,14 +48,10 @@ const contactLinks = [
 
 const stats = [
   { value: '4+', label: 'Years Experience', numericTarget: 4, suffix: '+' },
-  { value: '4+', label: 'Production Projects', numericTarget: 4, suffix: '+' },
+  { value: '4+', label: 'Production Systems', numericTarget: 4, suffix: '+' },
   { value: 'CI 3/4', label: 'Core Framework', numericTarget: null, suffix: '' },
 ];
 
-/**
- * Custom hook: animates a number from 0 to `target` over `duration` ms
- * once the element referenced by the returned ref scrolls into view.
- */
 const useCountUp = (target, duration = 1500) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -65,7 +63,6 @@ const useCountUp = (target, duration = 1500) => {
     const step = (now) => {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      // easeOutQuad for a nice deceleration
       const eased = 1 - (1 - progress) * (1 - progress);
       setCount(Math.floor(eased * target));
       if (progress < 1) {
@@ -98,49 +95,52 @@ const useCountUp = (target, duration = 1500) => {
 
 const AnimatedStat = ({ stat, index }) => {
   const { ref, count } = useCountUp(stat.numericTarget);
-
   const displayValue =
     stat.numericTarget !== null ? `${count}${stat.suffix}` : stat.value;
 
   return (
     <motion.div
       ref={ref}
-      className="about__stat"
+      className="space-about__stat-card"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: 0.2 + index * 0.1 }}
+      transition={{ delay: 0.15 + index * 0.1 }}
     >
-      <span className="about__stat-value">{displayValue}</span>
-      <span className="about__stat-label">{stat.label}</span>
+      <span className="space-about__stat-value">{displayValue}</span>
+      <span className="space-about__stat-label">{stat.label}</span>
     </motion.div>
   );
 };
 
-const timeline = [
+const experienceTimeline = [
   {
     period: 'Jan 2026 – Present',
     role: 'PHP Bootcamp Tutor',
     company: 'Avodha Edutech, Kochi',
-    modifier: '--emerald',
+    tag: 'Active Role',
+    color: '#10b981',
   },
   {
     period: 'Nov 2024 – Aug 2025',
     role: 'PHP Developer',
     company: 'YUYI Technology',
-    modifier: '', // indigo (default)
+    tag: 'Full-time',
+    color: '#818cf8',
   },
   {
     period: 'Apr 2022 – Oct 2024',
     role: 'PHP Developer',
-    company: 'Megatrend',
-    modifier: '--purple',
+    company: 'Megatrend KMS',
+    tag: 'Full-time',
+    color: '#a855f7',
   },
   {
     period: '2022 · Internship',
     role: 'Full Stack Web Dev (Python/Django)',
     company: 'Synnefa Solutions',
-    modifier: '--pink',
+    tag: 'Internship',
+    color: '#ec4899',
   },
 ];
 
@@ -149,19 +149,22 @@ const educationTimeline = [
     period: '2018 – 2021',
     role: 'Diploma in Computer Engineering',
     company: 'Govt Polytechnic College Muttom, Thodupuzha',
-    modifier: '--purple',
+    tag: 'Diploma',
+    color: '#a855f7',
   },
   {
     period: '2015 – 2017',
     role: 'Higher Secondary Education',
     company: 'Govt Higher Secondary School Amaravathy, Kumily',
-    modifier: '--pink',
+    tag: 'Higher Secondary',
+    color: '#38bdf8',
   },
   {
     period: '2014 – 2015',
     role: 'High School (SSLC)',
     company: 'Fathima Matha High School Mlamala, Vandiperiyar',
-    modifier: '',
+    tag: 'SSLC',
+    color: '#6366f1',
   },
 ];
 
@@ -169,150 +172,183 @@ const About = () => {
   const [activeTab, setActiveTab] = useState('experience');
 
   return (
-    <section className="about" id="about">
-      <div className="about__container">
-        <motion.h2
-          className="about__title"
+    <section className="space-about" id="about">
+      <div className="space-about__container">
+        {/* Section Heading */}
+        <motion.div
+          className="space-about__header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          About Me
-        </motion.h2>
+          <span className="space-about__badge">Profile &amp; Journey</span>
+          <h2 className="space-about__title">
+            About <span className="space-about__title-gradient">Me</span>
+          </h2>
+          <p className="space-about__subtitle">
+            Passionate software engineer bridging real-world business requirements
+            with scalable, reliable backend architectures.
+          </p>
+        </motion.div>
 
-        <div className="about__grid">
-          {/* ─── Left Column ──────────────────────────── */}
+        <div className="space-about__grid">
+          {/* ─── Left Column: Avatar & Bio & Contact Links ─────── */}
           <motion.div
-            className="about__left"
+            className="space-about__left-card"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="about__bio">
+            {/* Avatar with glowing space orbit ring */}
+            <div className="space-about__avatar-wrapper">
+              <div className="space-about__avatar-ring" />
+              <img
+                src="/images/avatar.png"
+                alt="Avinash Raju"
+                className="space-about__avatar"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+              <div className="space-about__status-dot" title="Available for hire" />
+            </div>
+
+            <div className="space-about__bio">
               <p>
-                I'm a PHP developer with 4+ years of hands-on experience
-                building production-grade web applications. My core strength
-                lies in{' '}
-                <span className="about__bio-accent">CodeIgniter</span> — both
-                CI 3 and CI 4 — where I've architected backend systems
-                handling real business logic at scale.
+                I'm a PHP developer with <strong>4+ years of hands-on experience</strong>{' '}
+                building production-grade web applications. My core strength lies in{' '}
+                <span className="space-about__accent">CodeIgniter (CI 3 &amp; CI 4)</span>{' '}
+                where I've architected backend systems handling enterprise business
+                logic, invoices, candidate pipelines, and laboratory workflows at scale.
               </p>
               <p>
-                I'm also expanding into{' '}
-                <span className="about__bio-accent">Laravel</span> and modern
-                frontend frameworks like React. I enjoy turning complex
-                requirements into clean, maintainable code and shipping
-                features that actually make a difference.
+                I also specialize in <span className="space-about__accent">Laravel</span>,{' '}
+                MySQL optimization, and modern frontend tools like React. I pride myself
+                on crafting clean, secure, maintainable code that delivers real-world
+                reliability.
               </p>
             </div>
 
-            {/* CV Buttons */}
-            <div className="about__cv-actions">
+            {/* CV Actions */}
+            <div className="space-about__cv-actions">
               <a
                 href="/cv/Avinash_Raju.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="about__cv-btn about__cv-btn--view"
+                className="space-about__cv-btn space-about__cv-btn--view"
               >
                 <FiEye /> View CV
               </a>
               <a
                 href="/cv/Avinash_Raju.pdf"
                 download
-                className="about__cv-btn about__cv-btn--download"
+                className="space-about__cv-btn space-about__cv-btn--download"
               >
                 <FiDownload /> Download CV
               </a>
             </div>
 
-            {/* Contact links */}
-            <ul className="about__contact-list">
+            {/* Contact Details */}
+            <ul className="space-about__contact-list">
               {contactLinks.map((item, i) => (
-                <li key={i} className="about__contact-item">
-                  <span className="about__contact-icon">{item.icon}</span>
+                <li key={i} className="space-about__contact-item">
+                  <span className="space-about__contact-icon">{item.icon}</span>
                   {item.isLink ? (
                     <a
                       href={item.href}
-                      className="about__contact-link"
+                      className="space-about__contact-link"
                       {...(item.external && {
                         target: '_blank',
                         rel: 'noopener noreferrer',
-                        })}
+                      })}
                     >
                       {item.label}
                     </a>
                   ) : (
-                    <span className="about__contact-text">{item.label}</span>
+                    <span className="space-about__contact-text">{item.label}</span>
                   )}
                 </li>
               ))}
             </ul>
           </motion.div>
 
-          {/* ─── Right Column ─────────────────────────── */}
+          {/* ─── Right Column: Stats & Timeline Tabs ──────────── */}
           <motion.div
-            className="about__right"
+            className="space-about__right-card"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            {/* Stats */}
-            <div className="about__stats">
+            {/* Stats Row */}
+            <div className="space-about__stats-row">
               {stats.map((stat, i) => (
                 <AnimatedStat key={i} stat={stat} index={i} />
               ))}
             </div>
 
-            {/* Tab Switcher */}
-            <div className="about__tabs">
+            {/* Timeline Tabs */}
+            <div className="space-about__tabs">
               <button
-                className={`about__tab ${activeTab === 'experience' ? 'about__tab--active' : ''}`}
+                className={`space-about__tab ${
+                  activeTab === 'experience' ? 'space-about__tab--active' : ''
+                }`}
                 onClick={() => setActiveTab('experience')}
               >
-                Experience
+                <FaBriefcase size={14} />
+                <span>Experience</span>
               </button>
               <button
-                className={`about__tab ${activeTab === 'education' ? 'about__tab--active' : ''}`}
+                className={`space-about__tab ${
+                  activeTab === 'education' ? 'space-about__tab--active' : ''
+                }`}
                 onClick={() => setActiveTab('education')}
               >
-                Education
+                <FaGraduationCap size={15} />
+                <span>Education</span>
               </button>
             </div>
 
-            {/* Timeline content */}
-            <div className="about__timeline">
-              {activeTab === 'experience' ? (
-                timeline.map((item, i) => (
-                  <motion.div
-                    key={`exp-${i}`}
-                    className={`about__timeline-item${item.modifier ? ` about__timeline-item${item.modifier}` : ''}`}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <div className="about__timeline-period">{item.period}</div>
-                    <div className="about__timeline-role">{item.role}</div>
-                    <div className="about__timeline-company">{item.company}</div>
-                  </motion.div>
-                ))
-              ) : (
-                educationTimeline.map((item, i) => (
-                  <motion.div
-                    key={`edu-${i}`}
-                    className={`about__timeline-item${item.modifier ? ` about__timeline-item${item.modifier}` : ''}`}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <div className="about__timeline-period">{item.period}</div>
-                    <div className="about__timeline-role">{item.role}</div>
-                    <div className="about__timeline-company">{item.company}</div>
-                  </motion.div>
-                ))
-              )}
+            {/* Timeline Content */}
+            <div className="space-about__timeline">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-about__timeline-list"
+                >
+                  {(activeTab === 'experience'
+                    ? experienceTimeline
+                    : educationTimeline
+                  ).map((item, i) => (
+                    <div key={i} className="space-about__timeline-item">
+                      <div
+                        className="space-about__timeline-dot"
+                        style={{ background: item.color, boxShadow: `0 0 10px ${item.color}` }}
+                      />
+                      <div className="space-about__timeline-content">
+                        <div className="space-about__timeline-top">
+                          <span className="space-about__timeline-period">
+                            {item.period}
+                          </span>
+                          <span className="space-about__timeline-tag">
+                            {item.tag}
+                          </span>
+                        </div>
+                        <h4 className="space-about__timeline-role">{item.role}</h4>
+                        <p className="space-about__timeline-company">
+                          {item.company}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>

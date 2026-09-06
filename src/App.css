@@ -1,26 +1,20 @@
 /* ============================================
-   App Component Styles
+   3D Space Portfolio App Layout
    ============================================ */
 
-.app {
+.space-app {
   position: relative;
   min-height: 100vh;
-  font-family: var(--font-body);
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  width: 100%;
+  background-color: #030014;
+  color: #f1f5f9;
   overflow-x: hidden;
 }
 
-/* Selection / highlight color */
-.app ::selection {
-  background-color: #6366f1;
-  color: #ffffff;
-}
-
-.app ::-moz-selection {
-  background-color: #6366f1;
-  color: #ffffff;
+.space-main {
+  position: relative;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
 }
