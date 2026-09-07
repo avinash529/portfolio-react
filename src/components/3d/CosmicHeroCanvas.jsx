@@ -14,16 +14,33 @@ const CosmicHeroCanvas = () => {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.z = 4.2;
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
       powerPreference: 'high-performance',
     });
-    renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mount.appendChild(renderer.domElement);
+
+    // Responsive camera framing: ensures globe & orbital rings (radius 2.1) are 100% visible with margin
+    const updateCameraAndSize = () => {
+      if (!mount) return;
+      const w = mount.clientWidth || 450;
+      const h = mount.clientHeight || 450;
+      if (w === 0 || h === 0) return;
+
+      camera.aspect = w / h;
+      const targetRadius = 2.65;
+      const fovRad = (camera.fov * Math.PI) / 180;
+      const minAspect = Math.min(1, w / h);
+      camera.position.z = Math.max(6.2, targetRadius / (Math.tan(fovRad / 2) * minAspect));
+
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+
+    updateCameraAndSize();
 
     // Group for all celestial objects
     const group = new THREE.Group();
@@ -120,16 +137,12 @@ const CosmicHeroCanvas = () => {
 
     window.addEventListener('pointermove', onPointerMove, { passive: true });
 
-    // Resize Handler
-    const onResize = () => {
-      if (!mount) return;
-      const w = mount.clientWidth;
-      const h = mount.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    };
-    window.addEventListener('resize', onResize);
+    // Resize Observer & Handler
+    const resizeObserver = new ResizeObserver(() => {
+      updateCameraAndSize();
+    });
+    resizeObserver.observe(mount);
+    window.addEventListener('resize', updateCameraAndSize);
 
     // Animation Loop
     let animId;
@@ -159,7 +172,8 @@ const CosmicHeroCanvas = () => {
 
     return () => {
       window.removeEventListener('pointermove', onPointerMove);
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener('resize', updateCameraAndSize);
+      resizeObserver.disconnect();
       cancelAnimationFrame(animId);
       if (mount && renderer.domElement) {
         mount.removeChild(renderer.domElement);

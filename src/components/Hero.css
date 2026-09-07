@@ -51,8 +51,8 @@
 
 .space-hero__grid {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 40px;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
   align-items: center;
 }
 
@@ -233,6 +233,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 @media (max-width: 968px) {
